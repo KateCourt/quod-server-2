@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, getManager, In } from 'typeorm';
+import { InjectDataSource, InjectRepository } from '@nestjs/typeorm';
+import { Repository, getManager, In, DataSource } from 'typeorm';
 import { Sample } from './samples.entity';
 import { Pagination, PaginationOptionsInterface } from './../paginate';
 
@@ -9,7 +9,10 @@ import { Pagination, PaginationOptionsInterface } from './../paginate';
 @Injectable()
 export class SamplesService {
   [x: string]: any;
-  entityManager = getManager();
+  
+
+  @InjectDataSource() 
+  private entityManager: DataSource
 
   public constructor(@InjectRepository(Sample)
   private samplesRepository: Repository<Sample>

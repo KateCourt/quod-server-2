@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, In, getManager } from 'typeorm';
+import { InjectDataSource, InjectRepository } from '@nestjs/typeorm';
+import { Repository, In, getManager, DataSource } from 'typeorm';
 import { Organ } from './organs.entity';
 import { Pagination, PaginationOptionsInterface } from './../paginate';
 import { Like } from "typeorm";
@@ -9,7 +9,8 @@ import { Like } from "typeorm";
 
 @Injectable()
 export class OrgansService {
-  entityManager = getManager();
+  @InjectDataSource() 
+  private entityManager: DataSource
 
   public constructor(@InjectRepository(Organ)
   private organsRepository: Repository<Organ>
