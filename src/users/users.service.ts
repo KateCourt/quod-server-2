@@ -48,7 +48,7 @@ export class UsersService {
     });
   }
 
-  async findOne(email: String): Promise<User | undefined> {
+  async findOne(email: string): Promise<User | undefined> {
     
     
     let userObj = await this.usersRepository.findOneOrFail({ where: { email: email } });

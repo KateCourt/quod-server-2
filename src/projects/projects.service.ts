@@ -49,14 +49,14 @@ export class ProjectsService {
       skip
     });
   }
-
-  async findOne(email: String): Promise<Project | undefined> {
+// CHANGE - does not appear to be in use - email does not exist on projects
+  // async findOne(email: String): Promise<Project | undefined> {
     
     
-    let projectObj = await this.projectsRepository.findOneOrFail({ where: { email: email } });
+  //   let projectObj = await this.projectsRepository.findOneOrFail({ where: { email: email } });
     
-    return projectObj;
-  }
+  //   return projectObj;
+  // }
 
   // probably won't be used
   async remove(id: string): Promise<void> {

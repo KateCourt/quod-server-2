@@ -26,12 +26,16 @@ export class DonorsService {
     
     return donorsList;
   }
-
-  async findOne(id: string): Promise<Donor | undefined> {
-    
-
-
-    let donorObj = await this.donorsRepository.findOneOrFail(id, { relations: ["organs", "organs.regions"] });
+// CHANGE
+  async findOne(achiever_participant_id: string): Promise<Donor | undefined> {
+    let donorObj = await this.donorsRepository.findOneOrFail(
+      {
+        where: {
+          achiever_participant_id
+        },
+        relations: ["organs", "organs.regions"] 
+      }
+      );
     
     return donorObj;
   }

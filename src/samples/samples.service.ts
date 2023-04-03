@@ -153,10 +153,17 @@ export class SamplesService {
     });
   }
 
-  async findOne(id: number): Promise<Sample | undefined> {
+  async findOne(auto_sample_id: number): Promise<Sample | undefined> {
     
 
-    let sampleObj = await this.samplesRepository.findOneOrFail(id, { relations: ["region", "region.organ", "region.organ.donor"]});
+    let sampleObj = await this.samplesRepository.findOneOrFail(
+      {
+        where: {
+          auto_sample_id
+        },
+        relations: ["region", "region.organ", "region.organ.donor"]
+      }
+     );
     
     return sampleObj;
   }

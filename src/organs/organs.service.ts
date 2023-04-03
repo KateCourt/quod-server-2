@@ -23,10 +23,17 @@ export class OrgansService {
     return organsList;
   }
 
-  async findOne(id: number): Promise<Organ | undefined> {
+  async findOne(organ_id: number): Promise<Organ | undefined> {
     
 
-    let organObj = await this.organsRepository.findOneOrFail(id, { relations: ["regions", "donor"] });
+    let organObj = await this.organsRepository.findOneOrFail(
+      {
+        where: {
+          organ_id
+        },
+        relations: ["regions", "donor"]
+      }
+      );
     
     return organObj;
   }

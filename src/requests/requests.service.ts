@@ -50,7 +50,7 @@ export class RequestsService {
     });
   }
 
-  async findOne(email: String): Promise<Request | undefined> {
+  async findOne(email: string): Promise<Request | undefined> {
     
     
     let requestObj = await this.requestsRepository.findOneOrFail({ where: { email: email } , relations: ["user"]});
