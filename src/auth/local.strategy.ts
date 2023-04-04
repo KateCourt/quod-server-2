@@ -13,15 +13,24 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
 
   async validate(username: string, password: string): Promise<any> {
     
+    // Validate funtion is called by the passport strategy
+    // find a user
+    console.log('in local strategy validate on server')
     const email = username;
     const user = await this.usersService.findOne(email);
     
-    
-    const result = await this.authService.validateUser(user, password); //doesn't wait long enough, gets undefined
-    
+    // call validateUser
+    const result = await this.authService.validateUser(user, password);
+    console.log('authservice result')
+    console.log(result)
+
     if (!result) {
       throw new UnauthorizedException('error at validation stage');
     }
+
+    
+
+
     return result;
   }
 }
