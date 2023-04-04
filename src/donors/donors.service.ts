@@ -50,16 +50,29 @@ export class DonorsService {
       relations: ["organs", "organs.regions"]
     }
       );
-      // convert timestamps to date only
+     
   Object.entries(donorObj)
     .forEach(([key,value]) => {
+       // convert timestamps to date only
       if (value instanceof Date) {
         donorObj[key] = value.getDate() + '/' + (value.getMonth() +1) + '/' + value.getFullYear()
-        console.log(donorObj)
-      }   
+       
+      }  else if (this.isNumber(value)) {
+        // convert dates to 2 decimal places if not whole number
+        if(Number(value) % 1 !=0) {
+          value = Number(value).toFixed(2) 
+        } 
+      } 
     })
     return donorObj;
   }
+
+  isNumber(value: string | number): boolean
+{
+   return ((value != null) &&
+           (value !== '') &&
+           !isNaN(Number(value.toString())));
+}
 
 
   async findAllPaginate(
