@@ -184,6 +184,7 @@ export class OrgansService {
       console.log(query)
       const rawData = await this.entityManager.query(query);
       let total = rawData.length
+      console.log(rawData)
       let organIdList = []
       rawData.forEach(result => {
         if (organIdList.indexOf(result.organ_id) === -1) {

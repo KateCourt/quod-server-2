@@ -50,6 +50,14 @@ export class DonorsService {
       relations: ["organs", "organs.regions"]
     }
       );
+      // convert timestamps to date only
+  Object.entries(donorObj)
+    .forEach(([key,value]) => {
+      if (value instanceof Date) {
+        donorObj[key] = value.getDate() + '/' + (value.getMonth() +1) + '/' + value.getFullYear()
+        console.log(donorObj)
+      }   
+    })
     return donorObj;
   }
 
