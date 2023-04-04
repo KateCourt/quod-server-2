@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, In, getManager, Like, Unique, MinKey } from 'typeorm';
+import { InjectDataSource, InjectRepository } from '@nestjs/typeorm';
+import { Repository, In, getManager, Like, Unique, MinKey, DataSource } from 'typeorm';
 import { Metadata } from './metadata.entity';
 import { Pagination, PaginationOptionsInterface } from '../paginate';
 
@@ -9,7 +9,8 @@ import { Pagination, PaginationOptionsInterface } from '../paginate';
 @Injectable()
 export class MetadataService {
   
-  entityManager = getManager();
+   @InjectDataSource() 
+  private entityManager: DataSource
 
   public constructor(
     @InjectRepository(Metadata) 

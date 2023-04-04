@@ -1,6 +1,6 @@
 import { Inject, Injectable, HttpException, HttpStatus } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, getManager, In } from 'typeorm';
+import { InjectDataSource, InjectRepository } from '@nestjs/typeorm';
+import { Repository, getManager, In, DataSource } from 'typeorm';
 import { Donor } from './donors.entity';
 import { Pagination, PaginationOptionsInterface } from '../paginate';
 import { CsvParser } from 'nest-csv-parser'
@@ -26,7 +26,8 @@ interface FilterMetadataType {
 @Injectable()
 export class DonorsService {
 
-  entityManager = getManager();
+   @InjectDataSource() 
+  private entityManager: DataSource
   filterMetadataValues: any[];
 
   public constructor(@InjectRepository(Donor)

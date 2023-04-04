@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, getManager, In, Like } from 'typeorm';
+import { InjectDataSource, InjectRepository } from '@nestjs/typeorm';
+import { Repository, getManager, In, Like, DataSource } from 'typeorm';
 import { Region } from './regions.entity';
 import { Pagination, PaginationOptionsInterface } from '../paginate';
 import { MetadataService } from '../metadata/metadata.service';
@@ -10,7 +10,8 @@ import { CsvParser } from 'nest-csv-parser'
 @Injectable()
 export class RegionsService {
   [x: string]: any;
-  entityManager = getManager();
+   @InjectDataSource() 
+  private entityManager: DataSource
   filterMetadataValues: any[];
 
   public constructor(@InjectRepository(Region)
