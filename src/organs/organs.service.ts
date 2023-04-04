@@ -53,9 +53,27 @@ export class OrgansService {
         relations: ["regions", "donor"]
       }
       );
-
+      
+      // format decimal numbers to 2 places
+      Object.entries(organObj)
+    .forEach(([key,value]) => {
+      if (this.isNumber(value)) {
+        // convert dates to 2 decimal places if not whole number
+        if(Number(value) % 1 !=0) {
+          value = Number(value).toFixed(2) 
+        } 
+      } 
+    })
     return organObj;
   }
+
+  isNumber(value: string | number): boolean
+{
+   return ((value != null) &&
+           (value !== '') &&
+           !isNaN(Number(value.toString())));
+}
+
 
   // pagination code is in place here, however it is not used, take and skip are not populated so it returns all
   // params come in as pagination interface 'filter'
