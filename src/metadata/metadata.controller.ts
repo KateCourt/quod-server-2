@@ -3,6 +3,7 @@ import { MetadataService } from './metadata.service'
 
 @Controller()
 export class MetadataController {
+
     constructor(
     private metadataService: MetadataService){}
 
@@ -12,5 +13,10 @@ export class MetadataController {
       return this.metadataService.findAll();
     }
 
+    @Get('/buildFilters')
+    async buildFilters(@Request() req) {
+      
+      return this.metadataService.buildFilters();
+    }
    
 }

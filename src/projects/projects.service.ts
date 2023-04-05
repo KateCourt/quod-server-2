@@ -49,8 +49,8 @@ export class ProjectsService {
       skip
     });
   }
-// CHANGE - does not appear to be in use - email does not exist on projects
-  // async findOne(email: String): Promise<Project | undefined> {
+
+  // async findOne(email: string): Promise<Project | undefined> {
     
     
   //   let projectObj = await this.projectsRepository.findOneOrFail({ where: { email: email } });

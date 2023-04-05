@@ -34,8 +34,7 @@ export class RegionsController {
 
     @Post('/filterRegionsByID')
     async filterRegionsByID(@Request() req) {
-      
-        return this.regionsService.filterRegions(req.body);
+        return this.regionsService.filterRegionsByDonorID(req.body);
     }
     
     

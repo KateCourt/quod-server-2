@@ -1,16 +1,20 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { InjectDataSource, InjectRepository } from '@nestjs/typeorm';
+import { Repository, In, getManager, Like, Unique, MinKey, DataSource } from 'typeorm';
 import { Metadata } from './metadata.entity';
 import { Pagination, PaginationOptionsInterface } from '../paginate';
-import {Like} from "typeorm";
 
 //export type User = any;
 
 @Injectable()
 export class MetadataService {
   
-  public constructor(@InjectRepository(Metadata)
+   @InjectDataSource() 
+  private entityManager: DataSource
+
+  public constructor(
+    @InjectRepository(Metadata) 
+    
   private metadataRepository: Repository<Metadata>
   ) {
   }
@@ -21,6 +25,77 @@ export class MetadataService {
     
     return metadataList;
   }
+
+  async buildFilters(): Promise<any>{
+
+  let metadataList = await this.metadataRepository.find();
+  let filterFields: Metadata[] = [];
+  // Find all entries in the metadata table that have values in the filterType column
+  for (let metadataEntry of metadataList){
+    if (metadataEntry.filterType == 'unique' || metadataEntry.filterType == 'highlow' ){
+      filterFields.push(metadataEntry)
+    }
+  }
+  let filterPicklistValues = []
+  for (let filterField of filterFields){
+    if (filterField.filterType == 'unique'){
+      // get all unique values for the relevant column
+      // sql query based on table
+      let query = 'select distinct ' + filterField.column_name + ' from ' + filterField.table
+      const rawData = await this.entityManager.query(query);
+      // strip values only out of array of objects each with key of column name
+      let uniqueItemsArray = [];
+      rawData.forEach(row => {
+        uniqueItemsArray.push(row[filterField.column_name])
+      });
+      // build new object
+      filterPicklistValues.push({
+        column: filterField.column_name,
+        category: filterField.category,
+        label: filterField.label,
+        table: filterField.table,
+        type: 'unique',
+        values: uniqueItemsArray,
+        min: null,
+        max: null
+      })
+    }
+    if (filterField.filterType == 'highlow'){
+      // get highest and lowest values for the relevant column
+      // build sql querys based on table
+      let minAndMax = {
+        min: 0,
+        max: 0
+      };
+      let maxQuery = 'select MAX(' + filterField.column_name + ') FROM ' + filterField.table
+      let minQuery= 'select MIN(' + filterField.column_name + ') FROM ' + filterField.table
+      const rawMin = await this.entityManager.query(minQuery);
+      const rawMax = await this.entityManager.query(maxQuery);
+      // select will always return an array, so get data out of it
+      if( rawMin[0]){
+        minAndMax.min = rawMin[0].min
+      }
+      if( rawMax[0]){
+        minAndMax.max = rawMax[0].max
+      }
+      // build new object
+      filterPicklistValues.push({
+        column: filterField.column_name,
+        category: filterField.category,
+        label: filterField.label,
+        table: filterField.table,
+        type: 'highlow',
+        values: [],
+        min: minAndMax.min,
+        max: minAndMax.max
+      })
+    }
+  }
+
+    return filterPicklistValues
+  }
+
+  
 /*
   async findOne(email: String): Promise<Metadata | undefined> {
   
