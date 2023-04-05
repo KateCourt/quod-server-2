@@ -60,7 +60,7 @@ export class OrgansService {
       if (this.isNumber(value)) {
         // convert dates to 2 decimal places if not whole number
         if(Number(value) % 1 !=0) {
-          value = Number(value).toFixed(2) 
+          organObj[key] = Number(value).toFixed(2) 
         } 
       } 
     })

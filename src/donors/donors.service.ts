@@ -53,14 +53,16 @@ export class DonorsService {
      
   Object.entries(donorObj)
     .forEach(([key,value]) => {
+      
        // convert timestamps to date only
       if (value instanceof Date) {
         donorObj[key] = value.getDate() + '/' + (value.getMonth() +1) + '/' + value.getFullYear()
        
       }  else if (this.isNumber(value)) {
+       
         // convert dates to 2 decimal places if not whole number
         if(Number(value) % 1 !=0) {
-          value = Number(value).toFixed(2) 
+          donorObj[key] = Number(value).toFixed(2) 
         } 
       } 
     })
