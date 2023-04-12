@@ -64,7 +64,6 @@ export class OrgansService {
         } 
       } else if (value instanceof Date) {
         // convert timestamps to date only
-        console.log(value)
         organObj.donor[key] = value.getDate() + '/' + (value.getMonth() +1) + '/' + value.getFullYear()
       }
 

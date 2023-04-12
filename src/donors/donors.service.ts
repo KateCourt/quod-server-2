@@ -62,6 +62,7 @@ export class DonorsService {
        
         // convert dates to 2 decimal places if not whole number
         if(Number(value) % 1 !=0) {
+          console.log(value)
           donorObj[key] = Number(value).toFixed(2) 
         } 
       } 

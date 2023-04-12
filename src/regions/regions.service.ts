@@ -259,7 +259,7 @@ export class RegionsService {
 
   async findOne(auto_region_id: number): Promise<Region | undefined> {
     
-
+console.log('here')
     let regionObj = await this.regionsRepository.findOneOrFail({
      where: {
       auto_region_id
@@ -267,9 +267,32 @@ export class RegionsService {
       relations: ["organ", "organ.donor"]
     }
      );
+      // format decimal numbers to 2 places
+      Object.entries(regionObj.organ.donor)
+    .forEach(([key,value]) => {
+      if (this.isNumber(value)) {
+        // convert dates to 2 decimal places if not whole number
+        if(Number(value) % 1 !=0) {
+          regionObj.organ.donor[key] = Number(value).toFixed(2) 
+        } 
+      } else if (value instanceof Date) {
+        // convert timestamps to date only
+   
+        regionObj.organ.donor[key] = value.getDate() + '/' + (value.getMonth() +1) + '/' + value.getFullYear()
+      }
+    })
+     
     
     return regionObj;
   }
+
+  isNumber(value: string | number): boolean
+  {
+     return ((value != null) &&
+             (value !== '') &&
+             !isNaN(Number(value.toString())));
+  }
+  
 
   // needs pagination
   async findMulti(idList: number[]): Promise<Region[] | undefined> {
