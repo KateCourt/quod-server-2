@@ -55,14 +55,20 @@ export class OrgansService {
       );
       
       // format decimal numbers to 2 places
-      Object.entries(organObj)
+      Object.entries(organObj.donor)
     .forEach(([key,value]) => {
       if (this.isNumber(value)) {
         // convert dates to 2 decimal places if not whole number
         if(Number(value) % 1 !=0) {
-          organObj[key] = Number(value).toFixed(2) 
+          organObj.donor[key] = Number(value).toFixed(2) 
         } 
-      } 
+      } else if (value instanceof Date) {
+        // convert timestamps to date only
+        console.log(value)
+        organObj.donor[key] = value.getDate() + '/' + (value.getMonth() +1) + '/' + value.getFullYear()
+      }
+
+
     })
     return organObj;
   }
