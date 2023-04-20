@@ -95,9 +95,9 @@ export class Region {
     exocrine_pancreas_inflammatory_cell_infiltration_posterior : string | null;
     
     @Column({ nullable: true })	//this is true/false
-    panin_anterior: boolean | null;
+    panin_anterior: string | null;
     @Column({ nullable: true })	//this is true/false
-    panin_posterior: boolean | null;
+    panin_posterior: string | null;
     
     @Column({ nullable: true })	
     ipmn_anterior: string | null;

@@ -3,26 +3,27 @@ import { Organ } from 'src/organs/organs.entity';
 
 @Entity()
 export class Donor {
-    @Column({ nullable: true })
-    odt: number;
-
-    @Column()
-    consent_type: string;
     
     @Column()
-    consent_opt_out: string;
+    odt: number;
+
+    @Column({ nullable: true })
+    consent_type: string | null;
+    
+    @Column({ nullable: true })
+    consent_opt_out: string | null;
     
     @PrimaryColumn()
     achiever_participant_id: string;
 
     @Column({ nullable: true })
-    RRID: number;
+    RRID: number | null;
 
     @Column({ nullable: true })
     reason_declined_for_clinical_use: string | null;
 
     @Column({ nullable: true })
-    sex: number | null;
+    sex: string | null;
 
     @Column({ nullable: true })
     age: number | null;
@@ -43,7 +44,7 @@ export class Donor {
     blood_group: string| null;
     
     @Column({ nullable: true })
-    rhesus_group: number| null;
+    rhesus_group: string| null;
     
     @Column({ nullable: true })
     type: string| null;
@@ -61,22 +62,22 @@ export class Donor {
     bmi: number| null;
     
     @Column({ nullable: true })
-    is_patient_ventilated: number | null;
+    is_patient_ventilated: string | null;
 
     @Column({ nullable: true })	
-    trauma_chest: number | null;
+    trauma_chest: string | null;
 
     @Column({ nullable: true })	
-    trauma_head : number | null;
+    trauma_head : string | null;
 
     @Column({ nullable: true })	
-    trauma_abdominal : number | null;
+    trauma_abdominal : string | null;
 
     @Column({ nullable: true })	
-    trauma_other: number | null;
+    trauma_other: string | null;
 
     @Column({ nullable: true })	
-    trauma_other_details: string| null;
+    trauma_other_details: string | null;
 
     @Column({ nullable: true })	
     ct_scan_results: string| null;
@@ -94,7 +95,7 @@ export class Donor {
     @Column({ nullable: true })
     obs_1_bp_diastolic: number| null;
 
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     obs_1_temperature: number| null;
     
     @Column({ nullable: true })
@@ -109,8 +110,8 @@ export class Donor {
     @Column({ nullable: true })
     obs_2_bp_diastolic: string| null;
     
-    @Column({ nullable: true })
-    obs_2_temperature: string| null;
+    @Column({ type: "float", nullable: true })
+    obs_2_temperature: number| null;
       
     @Column({ nullable: true })
     obs_3_datetime: string| null;
@@ -124,8 +125,8 @@ export class Donor {
     @Column({ nullable: true })
     obs_3_bp_diastolic: string| null;
   
-    @Column({ nullable: true })
-    obs_3_temperature: string| null;
+    @Column({ type: "float", nullable: true })
+    obs_3_temperature: number | null;
       
     @Column({ nullable: true })
     obs_4_datetime: string| null;
@@ -139,8 +140,8 @@ export class Donor {
     @Column({ nullable: true })
     obs_4_bp_diastolic: string| null;
       
-    @Column({ nullable: true })
-    obs_4_temperature: string| null;
+    @Column({ type: "float", nullable: true })
+    obs_4_temperature: number| null;
       
     @Column({ nullable: true })
     obs_5_datetime: string| null;
@@ -154,8 +155,8 @@ export class Donor {
     @Column({ nullable: true })
     obs_5_bp_diastolic: string| null;
       
-    @Column({ nullable: true })
-    obs_5_temperature: string| null;
+    @Column({ type: "float", nullable: true })
+    obs_5_temperature: number | null;
       
     @Column({ nullable: true })
     obs_comments: string| null;
@@ -176,71 +177,71 @@ export class Donor {
     @Column({nullable: true})
     bloodgases_obs1_datetime: Date| null;
 
-    @Column({ nullable: true })
-    bloodgases_obs1_fio2: string| null;
+    @Column({ type: "float", nullable: true })
+    bloodgases_obs1_fio2: number| null;
     
-    @Column({ nullable: true })
-    bloodgases_obs1_peep: string| null;
+    @Column({ type: "float", nullable: true })
+    bloodgases_obs1_peep: number| null;
 
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     bloodgases_obs1_saturation: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     bloodgases_obs1_ph: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     bloodgases_obs1_pco2: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     bloodgases_obs1_po2: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     bloodgases_obs1_hco3: number| null;
 
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     bloodgases_obs1_be: number| null;
     
-    @Column({ nullable: true })
-    bloodgases_obs1_lactate: string| null;
+    @Column({ type: "float", nullable: true })
+    bloodgases_obs1_lactate: number| null;
     
-    @Column({ nullable: true })
-    bloodgases_obs1_pao2_fio2_ratio: string| null;
+    @Column({ type: "float", nullable: true })
+    bloodgases_obs1_pao2_fio2_ratio: number| null;
     
     @Column({ nullable: true })
     bloodgases_obs2_result_stage: string| null;
     
-    @Column({ nullable: true })
+    @Column({nullable: true })
     bloodgases_obs2_datetime: Date| null;
     
-    @Column({ nullable: true })
-    bloodgases_obs2_fio2: string| null;	
+    @Column({ type: "float", nullable: true })
+    bloodgases_obs2_fio2: number| null;	
     
-    @Column({ nullable: true })
-    bloodgases_obs2_peep: string| null;
+    @Column({ type: "float", nullable: true })
+    bloodgases_obs2_peep: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     bloodgases_obs2_saturation: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     bloodgases_obs2_ph: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     bloodgases_obs2_pco2: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     bloodgases_obs2_po2: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     bloodgases_obs2_hco3: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     bloodgases_obs2_be: number| null;
     
-    @Column({ nullable: true })
-    bloodgases_obs2_lactate: string| null;
+    @Column({ type: "float", nullable: true })
+    bloodgases_obs2_lactate: number| null;
     
-    @Column({ nullable: true })
-    bloodgases_obs2_pao2_fio2_ratio: string| null;
+    @Column({ type: "float", nullable: true })
+    bloodgases_obs2_pao2_fio2_ratio: number| null;
     
     @Column({ nullable: true })
     bloodgases_obs3_result_stage: string| null;
@@ -248,35 +249,35 @@ export class Donor {
     @Column({ nullable: true })
     bloodgases_obs3_datetime: Date| null;
     
-    @Column({ nullable: true })
-    bloodgases_obs3_fio2: string| null;
+    @Column({ type: "float", nullable: true })
+    bloodgases_obs3_fio2: number| null;
     
-    @Column({ nullable: true })
-    bloodgases_obs3_peep: string| null;
+    @Column({ type: "float", nullable: true })
+    bloodgases_obs3_peep: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     bloodgases_obs3_saturation: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     bloodgases_obs3_ph: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     bloodgases_obs3_pco2: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     bloodgases_obs3_po2: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     bloodgases_obs3_hco3: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     bloodgases_obs3_be: number| null;
     
-    @Column({ nullable: true })
-    bloodgases_obs3_lactate: string| null;
+    @Column({ type: "float", nullable: true })
+    bloodgases_obs3_lactate: number| null;
     
-    @Column({ nullable: true })
-    bloodgases_obs3_pao2_fio2_ratio: string| null;
+    @Column({ type: "float", nullable: true })
+    bloodgases_obs3_pao2_fio2_ratio: number| null;
     
     @Column({ nullable: true })
     bloodgases_obs4_result_stage: string| null;
@@ -284,35 +285,35 @@ export class Donor {
     @Column({ nullable: true })
     bloodgases_obs4_datetime: Date| null;
     
-    @Column({ nullable: true })
-    bloodgases_obs4_fio2: string| null;
+    @Column({ type: "float", nullable: true })
+    bloodgases_obs4_fio2: number| null;
     
-    @Column({ nullable: true })
-    bloodgases_obs4_peep: string| null;
+    @Column({ type: "float", nullable: true })
+    bloodgases_obs4_peep: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     bloodgases_obs4_saturation: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     bloodgases_obs4_ph: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     bloodgases_obs4_pco2: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     bloodgases_obs4_po2: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     bloodgases_obs4_hco3: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     bloodgases_obs4_be: number| null;
     
-    @Column({ nullable: true })
-    bloodgases_obs4_lactate: string| null;
+    @Column({ type: "float", nullable: true })
+    bloodgases_obs4_lactate: number| null;
     
-    @Column({ nullable: true })
-    bloodgases_obs4_pao2_fio2_ratio: string| null;
+    @Column({ type: "float", nullable: true })
+    bloodgases_obs4_pao2_fio2_ratio: number| null;
     
     @Column({ nullable: true })
     bloodgases_obs5_result_stage: string| null;
@@ -320,35 +321,35 @@ export class Donor {
     @Column({ nullable: true })
     bloodgases_obs5_datetime: Date| null;
     
-    @Column({ nullable: true })
-    bloodgases_obs5_fio2: string| null;
+    @Column({ type: "float", nullable: true })
+    bloodgases_obs5_fio2: number| null;
     
-    @Column({ nullable: true })
-    bloodgases_obs5_peep: string| null;
+    @Column({ type: "float", nullable: true })
+    bloodgases_obs5_peep: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     bloodgases_obs5_saturation: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     bloodgases_obs5_ph: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     bloodgases_obs5_pco2: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     bloodgases_obs5_po2: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     bloodgases_obs5_hco3: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     bloodgases_obs5_be: number| null;
     
-    @Column({ nullable: true })
-    bloodgases_obs5_lactate: string| null;
+    @Column({ type: "float", nullable: true })
+    bloodgases_obs5_lactate: number| null;
     
-    @Column({ nullable: true })
-    bloodgases_obs5_pao2_fio2_ratio: string| null;
+    @Column({ type: "float", nullable: true })
+    bloodgases_obs5_pao2_fio2_ratio: number| null;
     
     @Column({ nullable: true })
     bloodgases_obs6_result_stage: string| null;
@@ -356,35 +357,35 @@ export class Donor {
     @Column({ nullable: true })
     bloodgases_obs6_datetime: Date| null;
     
-    @Column({ nullable: true })
-    bloodgases_obs6_fio2: string| null;
+    @Column({ type: "float", nullable: true })
+    bloodgases_obs6_fio2: number| null;
     
-    @Column({ nullable: true })
-    bloodgases_obs6_peep: string| null;
+    @Column({ type: "float", nullable: true })
+    bloodgases_obs6_peep: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     bloodgases_obs6_saturation: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     bloodgases_obs6_ph: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     bloodgases_obs6_pco2: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     bloodgases_obs6_po2: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     bloodgases_obs6_hco3: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     bloodgases_obs6_be: number| null;
     
-    @Column({ nullable: true })
-    bloodgases_obs6_lactate: string| null;
+    @Column({ type: "float", nullable: true })
+    bloodgases_obs6_lactate: number| null;
     
-    @Column({ nullable: true })
-    bloodgases_obs6_pao2_fio2_ratio: string| null;
+    @Column({ type: "float", nullable: true })
+    bloodgases_obs6_pao2_fio2_ratio: number| null;
     // blood gases end
 
 
@@ -453,11 +454,11 @@ export class Donor {
     @Column({ nullable: true })
     urinalysis_date: Date| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     urinalysis_specific_gravity: number| null;
     
     @Column({ nullable: true })
-    urinalysis_protein: number| null;
+    urinalysis_protein: string| null;
     
     @Column({ nullable: true })
     urinalysis_leukocytes: string| null;
@@ -598,40 +599,40 @@ export class Donor {
     @Column({ nullable: true })
     blood_results_obs1_datetime: Date| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     blood_results_obs1_haemoglobin: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     blood_results_obs1_serial_haematocrit: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     blood_results_obs1_white_cell_count: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     blood_results_obs1_platelets: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     blood_results_obs1_prothrombin: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     blood_results_obs1_aptt: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     blood_results_obs1_inr: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     blood_results_obs1_crp: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     blood_results_obs1_hba1c: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     blood_results_obs1_troponin_t: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     blood_results_obs1_troponin_i: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     blood_results_obs1_lactate: number| null;
     
     @Column({ nullable: true })
@@ -640,40 +641,40 @@ export class Donor {
     @Column({ nullable: true })
     blood_results_obs2_datetime: Date| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     blood_results_obs2_haemoglobin: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     blood_results_obs2_serial_haematocrit: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     blood_results_obs2_white_cell_count: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     blood_results_obs2_platelets: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     blood_results_obs2_prothrombin: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     blood_results_obs2_aptt: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     blood_results_obs2_inr: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     blood_results_obs2_crp: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     blood_results_obs2_hba1c: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     blood_results_obs2_troponin_t: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     blood_results_obs2_troponin_i: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     blood_results_obs2_lactate: number| null;
 
     @Column({ nullable: true })
@@ -682,40 +683,40 @@ export class Donor {
     @Column({ nullable: true })
     blood_results_obs3_datetime: Date| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     blood_results_obs3_haemoglobin: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     blood_results_obs3_serial_haematocrit: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     blood_results_obs3_white_cell_count: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     blood_results_obs3_platelets: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     blood_results_obs3_prothrombin: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     blood_results_obs3_aptt: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     blood_results_obs3_inr: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     blood_results_obs3_crp: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     blood_results_obs3_hba1c: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     blood_results_obs3_troponin_t: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     blood_results_obs3_troponin_i: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     blood_results_obs3_lactate: number| null;
 
     //Liver function tests:	
@@ -726,76 +727,76 @@ export class Donor {
     @Column({ nullable: true })
     liver_test1_sample_datetime: Date| null;
     	
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     liver_test1_total_protein: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     liver_test2_total_protein: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     liver_test1_phosphate: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     liver_test2_phosphate: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     liver_test1_glucose: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     liver_test2_glucose: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     liver_test1_gamma: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     liver_test2_gamma: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     liver_test1_ast: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     liver_test2_ast: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     liver_test1_albumin: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     liver_test2_albumin: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     liver_test1_ldh: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     liver_test2_ldh: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     liver_test1_calcium: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     liver_test2_calcium: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     liver_test1_alk_phos: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     liver_test2_alk_phos: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     liver_test1_alt: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     liver_test2_alt: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     liver_test1_bilirubin: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     liver_test2_bilirubin: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     liver_test1_amylase: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     liver_test2_amylase: number| null;
 
     @Column({ nullable: true })
@@ -818,59 +819,59 @@ export class Donor {
 
 
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     liver_test3_total_protein: number| null;
     
 
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     liver_test3_phosphate: number| null;
     
 
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     liver_test3_glucose: number| null;
     
 
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     liver_test3_gamma: number| null;
     
 
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     liver_test3_ast: number| null;
     
 
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     liver_test3_albumin: number| null;
     
 
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     liver_test3_ldh: number| null;
     
 
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     liver_test3_calcium: number| null;
 
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     liver_test3_alk_phos: number| null;
     
 
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     liver_test3_alt: number| null;
 
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     liver_test3_bilirubin: number| null;
 
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     liver_test3_amylase: number| null;
     
     @Column({ nullable: true })
@@ -884,34 +885,34 @@ export class Donor {
     @Column({ nullable: true })
     urea_electrolytes_test1_sample_datetime: Date| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     urea_electrolytes_test1_sodium: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     urea_electrolytes_test2_sodium: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     urea_electrolytes_test1_potassium: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     urea_electrolytes_test2_potassium: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     urea_electrolytes_test1_blood_urea: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     urea_electrolytes_test2_blood_urea: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     urea_electrolytes_test1_serum_creatinine: number| null;
     
-    @Column({ nullable: true })	
+    @Column({ type: "float", nullable: true })	
     urea_electrolytes_test2_serum_creatinine: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     urea_electrolytes_test1_eGFR: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     urea_electrolytes_test2_eGFR: number| null;
 
     @Column({ nullable: true })
@@ -932,38 +933,38 @@ export class Donor {
     @Column({ nullable: true })
     urea_electrolytes_test4_sample_datetime: Date| null;
 
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     urea_electrolytes_test3_sodium: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     urea_electrolytes_test4_sodium: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     urea_electrolytes_test3_potassium: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     urea_electrolytes_test4_potassium: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     urea_electrolytes_test3_blood_urea: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     urea_electrolytes_test4_blood_urea: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     urea_electrolytes_test3_serum_creatinine: number| null;
     
-    @Column({ nullable: true })	
+    @Column({ type: "float", nullable: true })	
     urea_electrolytes_test4_serum_creatinine: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     urea_electrolytes_test3_eGFR: number| null;
     
-    @Column({ nullable: true })
+    @Column({ type: "float", nullable: true })
     urea_electrolytes_test4_eGFR: number| null;
     
     @Column({ nullable: true })	
-    urea_electrolytes_renal_replacement_therapy: string| null;
+    urea_electrolytes_renal_replacement_therapy: string | null;
     
     //Past medical History:	
     

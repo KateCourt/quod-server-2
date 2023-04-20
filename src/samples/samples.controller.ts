@@ -20,8 +20,8 @@ export class SamplesController {
       return this.samplesService.findOne(id);
     }
 
-    @Post('/pagSamples')
-    async pagSamples(@Request() req) {
+    @Post('/pageSamples')
+    async pageSamples(@Request() req) {
         return this.samplesService.findAllPaginate(req.body);
     }
 
@@ -32,6 +32,11 @@ export class SamplesController {
         return this.samplesService.filterSamples(req.body);
     }
 
+
+    @Post('/filterSamplesByRegionID')
+    async filterRegionsByID(@Request() req) {
+        return this.samplesService.filterSamplesByRegionID(req.body);
+    }
 
     @Post('multiSample')
     async multiSamples(@Request() req) {

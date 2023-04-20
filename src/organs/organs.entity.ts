@@ -7,6 +7,7 @@ export class Organ {
     @PrimaryGeneratedColumn()
     organ_id: number;
 
+    
     @Column()	
     organ_type: string;
 
@@ -40,195 +41,195 @@ export class Organ {
     pancreas_weight_g: number| null;
 
     @Column({ nullable: true })	
-    pancreas_quality: number| null;
+    pancreas_quality: string| null;
 
     @Column({ nullable: true })	
-    pancreas_blood: number| null;
+    pancreas_blood: string| null;
 
     @Column({ nullable: true })	
-    pancreas_fat: number| null;
+    pancreas_fat: string| null;
 
     @Column({ nullable: true })	
-    pancreas_color: number| null;
+    pancreas_color: string| null;
 
     @Column({ nullable: true })	
-    firmness: number| null;
+    firmness: string| null;
 
     @Column({ nullable: true })	
-    fibrosis: number| null;
+    fibrosis: string| null;
 
     // Exeter fields - Image-based AI quantification
     @Column({ nullable: true })	
     perc_endocrine_area_numvals: number| null;
-    @Column({ nullable: true })	
+    @Column({ type: "float", nullable: true })
     perc_endocrine_area_minumum: number| null;
-    @Column({ nullable: true })	
+    @Column({ type: "float", nullable: true })	
     perc_endocrine_area_25percentile: number| null;
-    @Column({ nullable: true })	
+    @Column({ type: "float", nullable: true })	
     perc_endocrine_area_median: number| null;
-    @Column({ nullable: true })	
+    @Column({ type: "float", nullable: true })	
     perc_endocrine_area_75percentile: number| null;
-    @Column({ nullable: true })	
+    @Column({ type: "float", nullable: true })	
     perc_endocrine_area_maximum: number| null;
-    @Column({ nullable: true })	
+    @Column({ type: "float", nullable: true })	
     perc_endocrine_area_range: number| null;
 
     @Column({ nullable: true })	
     perc_fat_area_numvals: number| null;
-    @Column({ nullable: true })	
+    @Column({ type: "float", nullable: true })	
     perc_fat_area_minumum: number| null;
-    @Column({ nullable: true })	
+    @Column({ type: "float", nullable: true })	
     perc_fat_area_25percentile: number| null;
-    @Column({ nullable: true })	
+    @Column({ type: "float", nullable: true })	
     perc_fat_area_median: number| null;
-    @Column({ nullable: true })	
+    @Column({ type: "float", nullable: true })	
     perc_fat_area_75percentile: number| null;
-    @Column({ nullable: true })	
+    @Column({ type: "float", nullable: true })	
     perc_fat_area_maximum: number| null;
-    @Column({ nullable: true })	
+    @Column({ type: "float", nullable: true })	
     perc_fat_area_range: number| null;
 
     @Column({ nullable: true })	
     perc_intralobular_fat_area_numvals: number| null;
-    @Column({ nullable: true })	
+    @Column({ type: "float", nullable: true })	
     perc_intralobular_fat_area_minumum: number| null;
-    @Column({ nullable: true })	
+    @Column({ type: "float", nullable: true })	
     perc_intralobular_fat_area_25percentile: number| null;
-    @Column({ nullable: true })	
+    @Column({ type: "float", nullable: true })	
     perc_intralobular_fat_area_median: number| null;
-    @Column({ nullable: true })	
+    @Column({ type: "float", nullable: true })	
     perc_intralobular_fat_area_75percentile: number| null;
-    @Column({ nullable: true })	
+    @Column({ type: "float", nullable: true })	
     perc_intralobular_fat_area_maximum: number| null;
-    @Column({ nullable: true })	
+    @Column({ type: "float", nullable: true })	
     perc_intralobular_fat_area_range: number| null;
 
     @Column({ nullable: true })	
     perc_interlobular_fat_area_numvals: number| null;
-    @Column({ nullable: true })	
+    @Column({ type: "float", nullable: true })	
     perc_interlobular_fat_area_minumum: number| null;
-    @Column({ nullable: true })	
+    @Column({ type: "float", nullable: true })	
     perc_interlobular_fat_area_25percentile: number| null;
-    @Column({ nullable: true })	
+    @Column({ type: "float", nullable: true })	
     perc_interlobular_fat_area_median: number| null;
-    @Column({ nullable: true })	
+    @Column({ type: "float", nullable: true })	
     perc_interlobular_fat_area_75percentile: number| null;
-    @Column({ nullable: true })	
+    @Column({ type: "float", nullable: true })	
     perc_interlobular_fat_area_maximum: number| null;
-    @Column({ nullable: true })	
+    @Column({ type: "float", nullable: true })	
     perc_interlobular_fat_area_range: number| null;
 
     @Column({ nullable: true })	
     perc_sr_area_numvals: number| null; // all changed srfg to sr as per call on 8/4/22
-    @Column({ nullable: true })	
+    @Column({ type: "float", nullable: true })	
     perc_sr_area_minumum: number| null;
-    @Column({ nullable: true })	
+    @Column({ type: "float", nullable: true })	
     perc_sr_area_25percentile: number| null;
-    @Column({ nullable: true })	
+    @Column({ type: "float", nullable: true })	
     perc_sr_area_median: number| null;
-    @Column({ nullable: true })	
+    @Column({ type: "float", nullable: true })	
     perc_sr_area_75percentile: number| null;
-    @Column({ nullable: true })	
+    @Column({ type: "float", nullable: true })	
     perc_sr_area_maximum: number| null;
-    @Column({ nullable: true })	
+    @Column({ type: "float", nullable: true })	
     perc_sr_area_range: number| null;
 
     @Column({ nullable: true })	
     islet_density_mm2_numvals: number| null;
-    @Column({ nullable: true })	
+    @Column({ type: "float", nullable: true })	
     islet_density_mm2_minumum: number| null;
-    @Column({ nullable: true })	
+    @Column({ type: "float", nullable: true })	
     islet_density_mm2_25percentile: number| null;
-    @Column({ nullable: true })	
+    @Column({ type: "float", nullable: true })	
     islet_density_mm2_median: number| null;
-    @Column({ nullable: true })	
+    @Column({ type: "float", nullable: true })	
     islet_density_mm2_75percentile: number| null;
-    @Column({ nullable: true })	
+    @Column({ type: "float", nullable: true })	
     islet_density_mm2_maximum: number| null;
-    @Column({ nullable: true })	
+    @Column({ type: "float", nullable: true })	
     islet_density_mm2_range: number| null;
 
     @Column({ nullable: true })	
     islet_size_um2_numvals: number| null;
-    @Column({ nullable: true })	
+    @Column({ type: "float", nullable: true })	
     islet_size_um2_minumum: number| null;
-    @Column({ nullable: true })	
+    @Column({ type: "float", nullable: true })	
     islet_size_um2_25percentile: number| null;
-    @Column({ nullable: true })	
+    @Column({ type: "float", nullable: true })	
     islet_size_um2_median: number| null;
-    @Column({ nullable: true })	
+    @Column({ type: "float", nullable: true })	
     islet_size_um2_75percentile: number| null;
-    @Column({ nullable: true })	
+    @Column({ type: "float", nullable: true })	
     islet_size_um2_maximum: number| null;
-    @Column({ nullable: true })	
+    @Column({ type: "float", nullable: true })	
     islet_size_um2_range: number| null;
 
     @Column({ nullable: true })	
     islet_circularity_numvals: number| null;
-    @Column({ nullable: true })	
+    @Column({ type: "float", nullable: true })	
     islet_circularity_minumum: number| null;
-    @Column({ nullable: true })	
+    @Column({ type: "float", nullable: true })	
     islet_circularity_25percentile: number| null;
-    @Column({ nullable: true })	
+    @Column({ type: "float", nullable: true })	
     islet_circularity_median: number| null;
-    @Column({ nullable: true })	
+    @Column({ type: "float", nullable: true })	
     islet_circularity_75percentile: number| null;
-    @Column({ nullable: true })	
+    @Column({ type: "float", nullable: true })	
     islet_circularity_maximum: number| null;
-    @Column({ nullable: true })	
+    @Column({ type: "float", nullable: true })	
     islet_circularity_range: number| null;
 
     @Column({ nullable: true })	
     islet_diameter_um2_numvals: number| null;
-    @Column({ nullable: true })	
+    @Column({ type: "float", nullable: true })	
     islet_diameter_um2_minumum: number| null;
-    @Column({ nullable: true })	
+    @Column({ type: "float", nullable: true })	
     islet_diameter_um2_25percentile: number| null;
-    @Column({ nullable: true })	
+    @Column({ type: "float", nullable: true })	
     islet_diameter_um2_median: number| null;
-    @Column({ nullable: true })	
+    @Column({ type: "float", nullable: true })	
     islet_diameter_um2_75percentile: number| null;
-    @Column({ nullable: true })	
+    @Column({ type: "float", nullable: true })	
     islet_diameter_um2_maximum: number| null;
-    @Column({ nullable: true })	
+    @Column({ type: "float", nullable: true })	
     islet_diameter_um2_range: number| null;
 
     @Column({ nullable: true })	
     peri_islet_sr_area_numvals: number| null; // changed collagen to sr as per call on 8/4/22
-    @Column({ nullable: true })	
+    @Column({ type: "float", nullable: true })	
     peri_islet_sr_area_minumum: number| null;
-    @Column({ nullable: true })	
+    @Column({ type: "float", nullable: true })	
     peri_islet_sr_area_25percentile: number| null;
-    @Column({ nullable: true })	
+    @Column({ type: "float", nullable: true })	
     peri_islet_sr_area_median: number| null;
-    @Column({ nullable: true })	
+    @Column({ type: "float", nullable: true })	
     peri_islet_sr_area_75percentile: number| null;
-    @Column({ nullable: true })	
+    @Column({ type: "float", nullable: true })	
     peri_islet_sr_area_maximum: number| null;
-    @Column({ nullable: true })	
+    @Column({ type: "float", nullable: true })	
     peri_islet_sr_area_range: number| null;
     
     @Column({ nullable: true })	
     total_islet_sr_area_numvals: number| null; // changed collagen to sr as per call on 8/4/22
-    @Column({ nullable: true })	
+    @Column({ type: "float", nullable: true })	
     total_islet_sr_area_minumum: number| null;
-    @Column({ nullable: true })	
+    @Column({ type: "float", nullable: true })	
     total_islet_sr_area_25percentile: number| null;
-    @Column({ nullable: true })	
+    @Column({ type: "float", nullable: true })	
     total_islet_sr_area_median: number| null;
-    @Column({ nullable: true })	
+    @Column({ type: "float", nullable: true })	
     total_islet_sr_area_75percentile: number| null;
-    @Column({ nullable: true })	
+    @Column({ type: "float", nullable: true })	
     total_islet_sr_area_maximum: number| null;
-    @Column({ nullable: true })	
+    @Column({ type: "float", nullable: true })	
     total_islet_sr_area_range: number| null;
 
 
-    @Column({ nullable: true })	
+    @Column({ type: "float", nullable: true })	
     calculated_endocrine_mass_g: number| null;
-    @Column({ nullable: true })	
+    @Column({ type: "float", nullable: true })	
     calculated_fat_mass_g: number| null;
-    @Column({ nullable: true })	
+    @Column({ type: "float", nullable: true })	
     calculated_collagen_mass_g: number| null;
     
     //pathologist evaluation
@@ -249,7 +250,7 @@ export class Organ {
     exocrine_pancreas_inflammatory_cell_infiltration : string | null;
     
     @Column({ nullable: true })	
-    panin: boolean | null;   //this is now true false according to jim meeting 8/4/22
+    panin: string | null;   //this is now true false according to jim meeting 8/4/22, changed to text to prevent errors occuring with one boolean in the spreadsheet
     
     @Column({ nullable: true })	
     ipmn: string | null;

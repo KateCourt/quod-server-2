@@ -1,24 +1,11 @@
 import { Controller, Get, Request, Post, Param, UseGuards } from '@nestjs/common';
 import { UsersService } from './users.service'
-
+import { AuthService } from 'src/auth/auth.service';
 
 @Controller()
 export class UsersController {
     constructor(
         private usersService: UsersService) { }
-
-    /* 
-       @Get('/allSamples')
-        async allSamples(@Request() req) {
-            
-            return this.samplesService.findAll();
-        }
-    
-        @Get('/oneSample/:sampleID')
-        async oneOrgan(@Param('sampleID') id: number){
-          
-          return this.samplesService.findOne(id);
-        }*/
 
     @Post('/users/view')
     async pagUsers(@Request() req) {
@@ -50,6 +37,15 @@ export class UsersController {
         
         
         return this.usersService.updateRole(req.body.id, req.body.role);
+    }
+
+
+
+    @Post('users/reset')
+    async reset(@Request() req) {
+        
+        
+        return this.usersService.reset(req.body.resetUser);
     }
 
     @Post('users/create')

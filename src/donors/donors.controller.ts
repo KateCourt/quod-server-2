@@ -1,4 +1,4 @@
-import { Controller, Get, Request, Post, Param, UseGuards, UseInterceptors, UploadedFile } from '@nestjs/common';
+import { Controller, Get, Request, Post, Param, UseGuards, UseInterceptors, UploadedFile, Inject } from '@nestjs/common';
 import { DonorsService } from './donors.service'
 import { FileInterceptor } from '@nestjs/platform-express';
 import { csvFileFilter } from '../utils/file-uploading.utils';
@@ -27,8 +27,12 @@ export class DonorsController {
         return this.donorsService.filterDonors(req.body);
     }
 
+    @Post('/pageDonors')
+    async pageDonors(@Request() req) {
+        return this.donorsService.findAllPaginate(req.body);
+    }
 
-    @Post('/Donor/upload')
+  @Post('/Donor/upload')
   @UseInterceptors(
     FileInterceptor('donordata', {
       fileFilter: csvFileFilter,

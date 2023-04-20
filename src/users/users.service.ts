@@ -4,7 +4,7 @@ import { Injectable, HttpStatus, HttpException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './users.entity';
-import { Pagination, PaginationOptionsInterface } from './../paginate';
+import { Pagination, PaginationOptionsInterface } from '../paginate';
 import * as bcrypt from 'bcrypt';
 
 //export type User = any;
@@ -20,9 +20,9 @@ export class UsersService {
 
 
   async findAll(): Promise<User[]> {
-    
+
     let userList = await this.usersRepository.find();
-    
+
     return userList;
   }
 
@@ -48,11 +48,11 @@ export class UsersService {
     });
   }
 
-  async findOne(email: String): Promise<User | undefined> {
-    
-    
+  async findOne(email: string): Promise<User | undefined> {
+
+
     let userObj = await this.usersRepository.findOneOrFail({ where: { email: email } });
-    
+
     return userObj;
   }
 
@@ -62,11 +62,11 @@ export class UsersService {
   }
 
   async create(user: User) {
-    
-    
+
+
     // ----- reject if required fields are missing
     if (!user.email || !user.password) {
-      
+
       throw new HttpException('Please provide all requested user information', HttpStatus.BAD_REQUEST);
     }
 
@@ -81,7 +81,7 @@ export class UsersService {
     //hash password
     bcrypt.hash(user.password, 10, async (err, hash) => {
       if (err) {
-        
+
         return new HttpException('Problem hashing password', HttpStatus.BAD_REQUEST);
       } else {
         user.password = hash;
@@ -97,14 +97,14 @@ export class UsersService {
           throw new HttpException(error, HttpStatus.BAD_REQUEST);
         }
       }
-      
+
 
     });
-    
-}
+
+  }
 
   async update(user: User) {
-    
+
     // check if user already exists
     const userInDb = await this.usersRepository.findOne({ where: { email: user.email } });
     const userID = userInDb.user_id;
@@ -120,8 +120,51 @@ export class UsersService {
 
   }
 
+  
+
+  async reset(resetUser) {
+
+    // ----- reject if required fields are missing
+    if (!resetUser.email || !resetUser.token || !resetUser.password) {
+
+      throw new HttpException('Please provide all requested information', HttpStatus.BAD_REQUEST);
+    }
+
+
+    // check if user already exists
+    const userInDb = await this.usersRepository.findOne({ where: { email: resetUser.email } });
+    if (!userInDb) {
+      throw new HttpException('No User with that email exists', HttpStatus.BAD_REQUEST);
+    }
+
+    // check tokens save to DB matches token entered by user
+    if (userInDb.password == resetUser.token) {
+
+      //hash password
+      bcrypt.hash(resetUser.password, 10, async (err, hash) => {
+        if (err) {
+
+          return new HttpException('Problem hashing password', HttpStatus.BAD_REQUEST);
+        } else {
+          userInDb.password = hash;
+
+          // save user in db
+          try {
+            return await this.usersRepository.update(userInDb.user_id, userInDb);
+          } catch (error) {
+            throw new HttpException(error, HttpStatus.BAD_REQUEST);
+          }
+        }
+
+
+      });
+
+    } else return new HttpException('Token entered does not match that sent', HttpStatus.BAD_REQUEST);
+
+  }
+
   async updateStatus(id: number, status: string) {
-    
+
 
     const userInDb = await this.usersRepository.findOne({ where: { user_id: id } });
     if (!userInDb) {
@@ -129,7 +172,7 @@ export class UsersService {
     }
 
     try {
-      return await this.usersRepository.update(id, {status: status});
+      return await this.usersRepository.update(id, { status: status });
     } catch (error) {
       throw new HttpException(error, HttpStatus.BAD_REQUEST);
     }
@@ -137,7 +180,7 @@ export class UsersService {
   }
 
   async updateRole(id: number, role: string) {
-    
+
 
     const userInDb = await this.usersRepository.findOne({ where: { user_id: id } });
     if (!userInDb) {
@@ -145,7 +188,7 @@ export class UsersService {
     }
 
     try {
-      return await this.usersRepository.update(id, {role: role});
+      return await this.usersRepository.update(id, { role: role });
     } catch (error) {
       throw new HttpException(error, HttpStatus.BAD_REQUEST);
     }
