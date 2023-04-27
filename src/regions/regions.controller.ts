@@ -15,7 +15,7 @@ export class RegionsController {
     }
 
     @Get('/oneRegion/:regionID')
-    async oneOrgan(@Param('regID') id: number){
+    async oneOrgan(@Param('regionID') id: number){
       
       return this.regionsService.findOne(id);
     }
