@@ -259,7 +259,7 @@ export class RegionsService {
 
   async findOne(auto_region_id: number): Promise<Region | undefined> {
     
-console.log('here')
+
     let regionObj = await this.regionsRepository.findOneOrFail({
      where: {
       auto_region_id

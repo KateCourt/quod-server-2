@@ -35,8 +35,8 @@ import { Metadata } from './metadata/metadata.entity';
       password: process.env.DB_PASSWORD,
       database: process.env.DB_DATABASE,
       entities: [User, Donor, Organ, Region, Sample, Project, Request, Metadata],
-      synchronize: true, /*shouldn't be used in prod*/
-      ssl: true   /*for live only*/
+      synchronize: (process.env.SYNCH === 'true'), /*shouldn't be used in prod*/
+      ssl: (process.env.SSL === 'true')   /*for live only*/
       }), 
       MulterModule.register({
         dest: './QuOD-Server',
