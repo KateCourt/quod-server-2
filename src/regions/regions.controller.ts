@@ -20,7 +20,7 @@ export class RegionsController {
       return this.regionsService.findOne(id);
     }
 
-    @Post('/pagRegions')
+    @Post('/pageRegions')
     async pagRegions(@Request() req) {
         return this.regionsService.findAllPaginate(req.body);
     }

@@ -38,6 +38,7 @@ export class DonorsService {
   }
 
   async findAll(): Promise<Donor[]> {
+    console.log('find all')
     let donorsList = await this.donorsRepository.find({ relations: ["organs", "organs.regions"] });
     return donorsList;
   }

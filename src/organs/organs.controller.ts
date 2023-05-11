@@ -14,6 +14,11 @@ export class OrgansController {
       return this.organsService.findAll();
     }
 
+    @Post('/pageOrgans')
+    async pagRegions(@Request() req) {
+        return this.organsService.findAllPaginate(req.body);
+    }
+
     @Get('/oneOrgan/:organID')
     async oneOrgan(@Param('organID') id: number){
       
