@@ -84,9 +84,13 @@ export class DonorsService {
     const take = options.take
     const skip = options.skip
     //const keyword = query.keyword || ''
+    
 
     const [results, total] = await this.donorsRepository.findAndCount(
       {
+        order: {
+          achiever_participant_id: 'ASC'
+        },
         relations: ["organs", "organs.regions"],
         take: take,
         skip: skip
