@@ -32,8 +32,7 @@ export class AuthService {
 
             });
         })
-        console.log('comapre passwords')
-        console.log(comparepasswords)
+     
         return comparepasswords;
 
     };
@@ -57,13 +56,13 @@ export class AuthService {
           // send it via email
           // using Twilio SendGrid's v3 Node.js Library
           // https://github.com/sendgrid/sendgrid-nodejs
-    
+   
           sgMail.setApiKey(process.env.SENDGRID_API_KEY)
           const msg = {
             to: userInDb.email, // Change to your recipient
             from: 'rseteam.ncl@gmail.com', // change to the @newcastle one soon
             subject: 'Password Reset Request',
-            html: '<p>Please copy token into linked form. Token :</p> ' + token + '<p>Link:</p><a href=quodstorage.z33.web.core.windows.net/reset>quodstorage.z33.web.core.windows.net/reset</a>',
+            html: '<p>Please copy token into linked form. Token :</p> ' + token + '<p>Link:</p><a href=quodstorage.z33.web.core.windows.net/#/reset>quodstorage.z33.web.core.windows.net/#/reset</a>',
           }
           sgMail
             .send(msg)
