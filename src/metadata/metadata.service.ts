@@ -3,6 +3,7 @@ import { InjectDataSource, InjectRepository } from '@nestjs/typeorm';
 import { Repository, In, getManager, Like, Unique, MinKey, DataSource } from 'typeorm';
 import { Metadata } from './metadata.entity';
 import { Pagination, PaginationOptionsInterface } from '../paginate';
+import { raw } from 'express';
 
 //export type User = any;
 
@@ -26,6 +27,16 @@ export class MetadataService {
     return metadataList;
   }
 
+  compareAchieverIds( a, b ) {
+    if ( a.achiever_participant_id < b.achiever_participant_id ){
+      return -1;
+    }
+    if ( a.achiever_participant_id > b.achiever_participant_id ){
+      return 1;
+    }
+    return 0;
+  }
+
   async buildFilters(): Promise<any>{
 
   let metadataList = await this.metadataRepository.find();
@@ -42,7 +53,14 @@ export class MetadataService {
       // get all unique values for the relevant column
       // sql query based on table
       let query = 'select distinct ' + filterField.column_name + ' from ' + filterField.table
-      const rawData = await this.entityManager.query(query);
+      let rawData = await this.entityManager.query(query);
+      
+
+      // order acheiver id
+      if (filterField.column_name === 'achiever_participant_id') {
+        rawData.sort(this.compareAchieverIds)
+      }
+
       // strip values only out of array of objects each with key of column name
       let uniqueItemsArray = [];
       rawData.forEach(row => {

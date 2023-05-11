@@ -37,6 +37,9 @@ export class RegionsService {
 
     const [results, total] = await this.regionsRepository.findAndCount(
       {
+        order: {
+            region_id: 'ASC'
+        },
         //  where: { name: Like('%' + keyword + '%') }, order: { name: "DESC" },  NOTE: will probably have to order these
         relations: ["samples", "organ", "organ.donor"],
         take: take,
@@ -185,6 +188,9 @@ export class RegionsService {
 
     const [results, total] = await this.organsRepository.findAndCount(
       {
+        order: {
+          region_id: 'ASC'
+        },
         where: { organ_type: Like('%' + filter.idParam + '%') },  //NOTE: will probably have to order these
         relations: ["samples", "organ", "organ.donor"],
         take: take,
@@ -215,7 +221,10 @@ export class RegionsService {
     console.log('regions service regions by donor id')
     const [results, total] = await this.regionsRepository.findAndCount(
       {
-        where: { participant_id: Like('%' + filter.idParam + '%') },  //NOTE: will probably have to order these
+        order: {
+          region_id: 'ASC'
+        },
+        where: { participant_id: Like('%' + filter.idParam + '%') }, 
         relations: ["samples", "organ", "organ.donor"],
         take: take,
         skip: skip

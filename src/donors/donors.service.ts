@@ -38,6 +38,7 @@ export class DonorsService {
   }
 
   async findAll(): Promise<Donor[]> {
+    console.log('find all')
     let donorsList = await this.donorsRepository.find({ relations: ["organs", "organs.regions"] });
     return donorsList;
   }
@@ -84,9 +85,13 @@ export class DonorsService {
     const take = options.take
     const skip = options.skip
     //const keyword = query.keyword || ''
+    
 
     const [results, total] = await this.donorsRepository.findAndCount(
       {
+        order: {
+          achiever_participant_id: 'ASC'
+        },
         relations: ["organs", "organs.regions"],
         take: take,
         skip: skip

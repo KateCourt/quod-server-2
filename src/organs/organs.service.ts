@@ -42,6 +42,33 @@ export class OrgansService {
     return organsList;
   }
 
+  async findAllPaginate(
+    options: PaginationOptionsInterface,
+  ): Promise<Pagination<Organ>> {
+    const take = options.take
+    const skip = options.skip
+    //const keyword = query.keyword || ''
+    
+
+    const [results, total] = await this.organsRepository.findAndCount(
+      {
+        order: {
+          participant_id: 'ASC'
+        },
+        relations: ["regions", "donor"],
+        take: take,
+        skip: skip
+      }
+    );
+
+    return new Pagination<Organ>({
+      results,
+      total,
+      take,
+      skip
+    });
+  }
+
   async findOne(organ_id: number): Promise<Organ | undefined> {
 
 
