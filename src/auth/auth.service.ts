@@ -61,7 +61,7 @@ export class AuthService {
           sgMail.setApiKey(process.env.SENDGRID_API_KEY)
           const msg = {
             to: userInDb.email, // Change to your recipient
-            from: 'quodatlas@gmail.com', // change to the @newcastle one soon
+            from: 'rseteam.ncl@gmail.com', // change to the @newcastle one soon
             subject: 'Password Reset Request',
             html: '<p>Please copy token into linked form. Token :</p> ' + token + '<p>Link:</p><a href=quodstorage.z33.web.core.windows.net/reset>quodstorage.z33.web.core.windows.net/reset</a>',
           }
