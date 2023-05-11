@@ -32,8 +32,7 @@ export class AuthService {
 
             });
         })
-        console.log('comapre passwords')
-        console.log(comparepasswords)
+     
         return comparepasswords;
 
     };
@@ -57,7 +56,7 @@ export class AuthService {
           // send it via email
           // using Twilio SendGrid's v3 Node.js Library
           // https://github.com/sendgrid/sendgrid-nodejs
-    console.log(userInDb)
+   
           sgMail.setApiKey(process.env.SENDGRID_API_KEY)
           const msg = {
             to: userInDb.email, // Change to your recipient

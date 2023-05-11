@@ -4,6 +4,7 @@ import { Injectable, HttpStatus, HttpException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './users.entity';
+import sgMail = require('@sendgrid/mail');
 import { Pagination, PaginationOptionsInterface } from '../paginate';
 import * as bcrypt from 'bcrypt';
 
@@ -92,7 +93,27 @@ export class UsersService {
 
         // save user in db
         try {
-          return await this.usersRepository.insert(user);
+          const result = await this.usersRepository.insert(user);
+
+          // notify account that a new user has registered
+          sgMail.setApiKey(process.env.SENDGRID_API_KEY)
+          const msg = {
+            to: 'Michelle.Thursby@newcastle.ac.uk', 
+            from: 'rseteam.ncl@gmail.com', // change to the @newcastle one soon
+            subject: 'New QUOD portal user registration',
+            html: '<p>A new user has registered for the QUOD portal. You can approve users here:</p><a href=quodstorage.z33.web.core.windows.net/#/admin/users>quodstorage.z33.web.core.windows.net/#/admin/users</a>',
+          }
+          sgMail
+            .send(msg)
+            .then(() => {
+              console.log('Email sent')
+            })
+            .catch((error) => {
+              console.error(error)
+            })
+    
+
+          return result;
         } catch (error) {
           throw new HttpException(error, HttpStatus.BAD_REQUEST);
         }
