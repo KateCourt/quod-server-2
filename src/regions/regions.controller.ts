@@ -20,6 +20,12 @@ export class RegionsController {
       return this.regionsService.findOne(id);
     }
 
+    @Get('/oneRegionByLocation/:location')
+    async oneRegionByLocation(@Param('location') location: String){
+      console.log(location)
+      return this.regionsService.findOneLocationTwoRegions(location);
+    }
+
     @Post('/pageRegions')
     async pagRegions(@Request() req) {
         return this.regionsService.findAllPaginate(req.body);

@@ -6,6 +6,9 @@ import { Pagination, PaginationOptionsInterface } from '../paginate';
 import { MetadataService } from '../metadata/metadata.service';
 import { CsvParser } from 'nest-csv-parser'
 //export type User = any;
+import * as _ from "lodash";
+import { groupEnd } from 'console';
+
 
 @Injectable()
 export class RegionsService {
@@ -28,6 +31,13 @@ export class RegionsService {
     return regionsList;
   }
 
+  // instead of returning each view (A and B) of each region seperately, return them organised per region (with 2 views within each region)
+  async findAllAndGroupByRegion(): Promise<any> {
+    let regionsList = await this.regionsRepository.find({ relations: ["organ", "organ.donor"] });
+
+    
+  }
+
   async findAllPaginate(
     options: PaginationOptionsInterface,
   ): Promise<Pagination<Region>> {
@@ -35,7 +45,7 @@ export class RegionsService {
     const skip = options.skip
     //const keyword = query.keyword || ''
 
-    const [results, total] = await this.regionsRepository.findAndCount(
+    let [res, total] = await this.regionsRepository.findAndCount(
       {
         order: {
             region_id: 'ASC'
@@ -46,6 +56,16 @@ export class RegionsService {
         skip: skip
       }
     );
+
+      
+
+    let groupedRegionsObj = this.buildRegionObjects(res)
+      // for ease of working in client, change from object to array
+      let results = []
+for (const [id, regions] of Object.entries(groupedRegionsObj)) {
+  
+  results.push(groupedRegionsObj[id])
+}
 
     return new Pagination<Region>({
       results,
@@ -165,7 +185,16 @@ export class RegionsService {
       }
     });
     console.log(regionIdList);
-    let results = await this.findMulti(regionIdList);
+    let res = await this.findMulti(regionIdList);
+
+    let groupedRegionsObj = this.buildRegionObjects(res)
+      // for ease of working in client, change from object to array
+      let results = []
+for (const [id, regions] of Object.entries(groupedRegionsObj)) {
+  
+  results.push(groupedRegionsObj[id])
+}
+
 
     return new Pagination<Region>({
       results,
@@ -186,7 +215,7 @@ export class RegionsService {
     const filter = options.filter
     //const keyword = query.keyword || ''
 
-    const [results, total] = await this.organsRepository.findAndCount(
+    let [res, total] = await this.organsRepository.findAndCount(
       {
         order: {
           region_id: 'ASC'
@@ -197,6 +226,15 @@ export class RegionsService {
         skip: skip
       }
     );
+
+    let groupedRegionsObj = this.buildRegionObjects(res)
+      // for ease of working in client, change from object to array
+      let results = []
+for (const [id, regions] of Object.entries(groupedRegionsObj)) {
+  
+  results.push(groupedRegionsObj[id])
+}
+
 
     return new Pagination<Region>({
       results,
@@ -219,7 +257,7 @@ export class RegionsService {
     console.log(filter)
     //const keyword = query.keyword || ''
     console.log('regions service regions by donor id')
-    const [results, total] = await this.regionsRepository.findAndCount(
+  let [res, total] = await this.regionsRepository.findAndCount(
       {
         order: {
           region_id: 'ASC'
@@ -231,6 +269,15 @@ export class RegionsService {
       }
     );
       console.log(total)
+
+      let groupedRegionsObj = this.buildRegionObjects(res)
+      // for ease of working in client, change from object to array
+      let results = []
+for (const [id, regions] of Object.entries(groupedRegionsObj)) {
+  
+  results.push(groupedRegionsObj[id])
+}
+
     return new Pagination<Region>({
       results,
       total,
@@ -258,6 +305,7 @@ export class RegionsService {
       }
     );
 
+
     return new Pagination<Region>({
       results,
       total,
@@ -265,6 +313,103 @@ export class RegionsService {
       skip
     });
   }
+
+  // combine P1A and P1B, for example, as these are the same region
+  buildRegionObjects(regions) {
+
+    //console.log(regions)
+
+    // for each region, strip location out of region_id 
+    regions.forEach((region) => {
+      let location = region['region_id'].slice(0, -1)
+      region['location'] = location
+      // todo some kind of check here that this is correct?
+    })
+
+    // group by location
+    let groupedRegionsObj = _.groupBy(regions,function(o) {
+      return o.location
+    } )
+let groupedRegions = []
+
+    
+    
+
+    return groupedRegionsObj
+  }
+
+  async findOneLocationTwoRegions(location): Promise<any> {
+    // find up to 2 entries that match that location and return
+
+     let allLocationsUngrouped = await this.findAll()
+     // group by location
+     let allLocations = this.buildRegionObjects(allLocationsUngrouped)
+    
+
+     // find the entries matching the location query
+     for (let [key, regions] of Object.entries(allLocations)) {
+      
+      if (key === location) {
+        // this is the entry we are looking for
+       let regionObjects = []
+
+       // tidy up entries
+       Object.values(regions).forEach((r:any) => {
+        
+        // format decimal numbers to 2 decimal places and convert dates
+          Object.entries(r.organ.donor)
+    .forEach(([key,value]) => {
+     
+      if ( this.isNumber(value)) {
+        // convert dates to 2 decimal places if not whole number
+        if(Number(value) % 1 !=0) {
+          r.organ.donor[key] = Number(value).toFixed(2) 
+        } 
+      } else if (value instanceof Date) {
+        // convert timestamps to date only
+   
+        r.organ.donor[key] = value.getDate() + '/' + (value.getMonth() +1) + '/' + value.getFullYear()
+      }
+    })
+        
+        regionObjects.push(r)
+       }
+      
+
+       
+       )
+     
+       return regionObjects
+        
+      }
+     }
+
+    // let regionObj = await this.regionsRepository.findOneOrFail({
+    //  where: {
+    //   location
+    //  },
+    //   relations: ["organ", "organ.donor"]
+    // }
+    //  );
+    //   // format decimal numbers to 2 places
+    //   Object.entries(regionObj.organ.donor)
+    // .forEach(([key,value]) => {
+    //   if (this.isNumber(value)) {
+    //     // convert dates to 2 decimal places if not whole number
+    //     if(Number(value) % 1 !=0) {
+    //       regionObj.organ.donor[key] = Number(value).toFixed(2) 
+    //     } 
+    //   } else if (value instanceof Date) {
+    //     // convert timestamps to date only
+   
+    //     regionObj.organ.donor[key] = value.getDate() + '/' + (value.getMonth() +1) + '/' + value.getFullYear()
+    //   }
+    // })
+     
+    
+    // return regionObj;
+  }
+
 
   async findOne(auto_region_id: number): Promise<Region | undefined> {
     
@@ -295,7 +440,7 @@ export class RegionsService {
     return regionObj;
   }
 
-  isNumber(value: string | number): boolean
+  isNumber(value: any): boolean
   {
      return ((value != null) &&
              (value !== '') &&
