@@ -38,6 +38,11 @@ export class SamplesController {
         return this.samplesService.filterSamplesByRegionID(req.body);
     }
 
+    @Post('/convertRegionIDToSampleID')
+    async convertRegionIDToSampleID(@Request() req) {
+        return this.samplesService.convertRegionIDToSampleID(req.body.regionID);
+    }
+
     @Post('multiSample')
     async multiSamples(@Request() req) {
         

@@ -244,6 +244,28 @@ export class SamplesService {
   
     }
 
+   // Function just to get all regions for one donor
+   async convertRegionIDToSampleID(regionID
+  ) {
+   
+    //const keyword = query.keyword || ''
+    console.log('samples service sample by region id')
+    let query =  "SELECT sample.auto_sample_id FROM sample LEFT JOIN region ON sample.region_id = region.region_id LEFT JOIN organ ON region.organ_id = organ.organ_id LEFT JOIN donor ON organ.participant_id = donor.achiever_participant_id WHERE region.auto_region_id = " + regionID
+      
+    const rawData = await this.entityManager.query(query);
+    let total = rawData.length
+    let sampleIdList = []
+   
+    rawData.forEach(result => {
+      if(sampleIdList.indexOf(result.auto_sample_id) === -1){
+        sampleIdList.push(result.auto_sample_id)
+      }
+    });
+
+    return sampleIdList[0];
+
+  }
+
 
   async findOne(auto_sample_id: number): Promise<Sample | undefined> {
     
